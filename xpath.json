@@ -2,5 +2,5 @@
 {"company_name":"//p/span/a/strong"}
 {"website":"//p/a[1][@target=\"_blank\"]"}
 {"location":"//p/span/a/span"}
-{"job_type":"//p/a[2]"}
-{"job_category":"//p/a[3]"}
+{"job_type":"//div//p[2]/a[2]"}
+{"job_category":"//div//p[2]/a[3]"}

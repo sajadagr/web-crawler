@@ -36,7 +36,7 @@ result = []
 header = x_path_map.keys()
 header.append("link")
 company_name_set = set()
-with open("result-1.csv", 'wb') as wr:
+with open("result.csv", 'wb') as wr:
     writer = csv.writer(wr)
     writer.writerow(header)
 
@@ -47,7 +47,7 @@ with open("result-1.csv", 'wb') as wr:
         res = []
         for key, x_path in x_path_map.iteritems():
             cells = tree.xpath(x_path)
-            for td in cells[:1]:
+            for td in cells:
                 value = td.text
                 if key == "-":
                     if value not in company_name_set:
