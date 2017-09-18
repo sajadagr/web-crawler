@@ -33,9 +33,10 @@ links = soup.find_all('a')
 all_links = get_link(links)
 
 result = []
-header  = x_path_map.keys()
+header = x_path_map.keys()
 header.append("link")
-with open("result.csv", 'wb') as wr:
+company_name_set = set()
+with open("result-1.csv", 'wb') as wr:
     writer = csv.writer(wr)
     writer.writerow(header)
 
@@ -43,10 +44,16 @@ with open("result.csv", 'wb') as wr:
         conn = urllib2.urlopen(l)
         html = conn.read()
         tree = etree.HTML(html)
-        res =[]
+        res = []
         for key, x_path in x_path_map.iteritems():
             cells = tree.xpath(x_path)
             for td in cells[:1]:
-                res.append(td.text)
+                value = td.text
+                if key == "-":
+                    if value not in company_name_set:
+                        company_name_set.add(value)
+                        res.append(value)
+                else:
+                    res.append(td.text)
         res.append(l)
         writer.writerow(res)
