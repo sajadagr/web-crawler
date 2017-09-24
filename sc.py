@@ -22,7 +22,7 @@ def load_xpath_file():
     return x_path_map
 
 
-def get_link(ls):
+def filter_links(ls):
     sub_links = []
     for tag in ls:
         url = tag.get('href', None)
@@ -39,7 +39,7 @@ def scrap(out_put_file, x_path_map):
     html = conn.read()
     soup = BeautifulSoup(html)
     links = soup.find_all('a')
-    all_links = get_link(links)
+    all_links = filter_links(links)
 
     header = x_path_map.keys()
     header.append("link")
@@ -64,7 +64,7 @@ def scrap(out_put_file, x_path_map):
                                 company_name_set.add(value)
                                 res.append(value)
                         else:
-                            res.append(td.text)
+                            res.append(value)
                 if len(res) > 0:
                     res.append(l)
                     cache.append(l)
