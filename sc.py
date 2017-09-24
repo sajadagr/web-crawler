@@ -59,7 +59,7 @@ def scrap(out_put_file, x_path_map):
                     cells = tree.xpath(x_path)
                     for td in cells[:1]:
                         value = td.text
-                        if key == "-":
+                        if key == "company_name":
                             if value not in company_name_set:
                                 company_name_set.add(value)
                                 res.append(value)
@@ -70,7 +70,7 @@ def scrap(out_put_file, x_path_map):
                     cache.append(l)
                     cache_writer.write(l + "\n")
                     writer.writerow(res)
-
+        print company_name_set
 
 # NOTE: Here we are not extracting job views etc, compensation and
 #  email of person posting job as they are not found in html
