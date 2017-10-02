@@ -35,7 +35,14 @@ def get_link(ls):
 # currently we are not able to crawl two overlapping job links.
 
 def scrap(out_put_file, x_path_map):
-    conn = urllib2.urlopen(MAIN_URL)
+    headers = {
+        # if it will not work u may have to change cookie , which u get can by logging in to the hasjob.co from ur browser
+
+        'cookie' : 'lastuser=eyJhbGciOiJIUzI1NiIsInYiOjF9.eyJzZXNzaW9uaWQiOiI1S1dNSTk3aFREV2NIOVVLTlJwa2NBIiwidXNlcmlkIjoiS3ZqR1BHaEFSQXU5M1NucUQ1QndIUSJ9.MoheZQ_BVud_wZW3yVFnnHfxasXcRVyqsk9-tYiIxpw; session=.eJw9jlFrgzAUhf9KyHMekhuTtEIfNtoJw1QE-6BlDDWxNbZaWsfA4n-f2WBw4cA953ycJ64f9-ZzHDrb4_CJUYVDnGSvl_02DXJ46_bRe6vd4Tt3J8iny1VPHdWwW7xUFFFxLrad_5-Tl80GzwTbxy_ma8FIWXJKTdUIaIKa0YpZu5K2EYquaqGsj5_s0JdX25qldmSgFOecMJBKUeZ1rQQlEoRggfoguL2Vxtz_h-rswGOXitjtpthp8MT2Nv5NMD4w9ARRQEk9IqBMIcZDsV4ORTrD8_wD8thIdw.DLPX4A.JumXEael_NXtNl3gU4Y2uzS-Zcc; _ga=GA1.2.989936474.1505578155; _gid=GA1.2.33425005.1506942542; _gat=1',
+        #'ocp - apim - subscription - key': '4b2f445a1ca942e6b2a3361139f05ee3'
+    }
+    req = urllib2.Request(MAIN_URL, None, headers)
+    conn = urllib2.urlopen(req)
     html = conn.read()
     soup = BeautifulSoup(html)
     links = soup.find_all('a')
